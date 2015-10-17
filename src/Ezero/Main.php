@@ -42,7 +42,7 @@ $z = $p->getZ();
     }
     public function onItemHeld(PlayerItemHeldEvent $ev){
 $player = $ev->getPlayer();
-        if($ev->getPlayer()->getInventory()->getItemInHand() === 369){
+        if($ev->getPlayer()->getInventory()->getItemInHand()->getId() === 369){
             $ev->getPlayer()->sendTip(TextFormat::RED."Ezero Enabled!");
             $player->addEffect(Effect::getEffect(8)->setAmplifier(3)->setDuration(999999)->setVisible(true));
         }else{
