@@ -22,21 +22,26 @@ class Main extends PluginBase implements Listener {
     }
     
     public function onHurt(EntityDamageEvent $ev){
+$p = $ev->getEntity();
         if($ev instanceof EntityDamageByEntityEvent){
             $damager = $ev->getDamager();
             if($damager instanceof Player){
                 if($damager->getInventory()->getItemInHand()->getId() === 369){
                     $ev->setKnockBack(0.9);
-                    $ev->setDamage(getDamage()+5);
-                    $p->getLevel()->addParticle(new CriticalParticle($p->getLocation()));
-                    $ev->addEffect(Effect::getEffect(9)->setAmplifier(1)->setDuration(20)->setVisible(true));
+                    $ev->setDamage($ev->getDamage()+5);
+$x = $p->getX();
+$y = $p->getY();
+$z = $p->getZ();
+                    $p->getLevel()->addParticle(new CriticalParticle($x,$y,$z));
+                    $p->addEffect(Effect::getEffect(9)->setAmplifier(1)->setDuration(20)->setVisible(true));
                     $level = $damager->getLevel();
-                    $level->addSound(new AnvilSound($level->getLocation()));
+                    $level->addSound(new AnvilSound($damager->getLocation()));
                 }
             }
         }
     }
     public function onItemHeld(PlayerItemHeldEvent $ev){
+$player = $ev->getPlayer();
         if($ev->getPlayer()->getInventory()->getItemInHand() === 369){
             $ev->getPlayer()->sendTip(TextFormat::RED."Ezero Enabled!");
             $player->addEffect(Effect::getEffect(8)->setAmplifier(3)->setDuration(999999)->setVisible(true));
