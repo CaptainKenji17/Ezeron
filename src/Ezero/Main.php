@@ -38,7 +38,7 @@ class Main extends PluginBase implements Listener {
         $b = mt_rand(0, 255);
         $cen =  new Vector3($x, $y, $z);    
         $particle = new DustParticle($cen, $r, $g, $b);
-      $p->getLevel()addParticle($particle);
+      $p->getLevel()->addParticle($particle);
  $p->addEffect(Effect::getEffect(9)->setAmplifier(1)->setDuration(20)->setVisible(true));
                     $level = $damager->getLevel();
                     $level->addSound(new AnvilFallSound($damager->getLocation()),[$level]);
